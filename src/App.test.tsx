@@ -1,9 +1,14 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import {cleanup, render, screen} from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+afterEach(cleanup);
+
+describe("The counter", () => {
+    it('starts with 0', () => {
+        render(<App/>);
+        const counter = screen.getByText(/[0-9]+/i);
+        expect(counter).toBeInTheDocument();
+        expect(counter.textContent).toBe('Counter: 0');
+    });
 });
